@@ -56,14 +56,21 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        selectedList = indexPath.section
-        currentListData = DataController.sharedInstance.listDetails[selectedList]
+        if indexPath.section != selectedList {
+            selectedList = indexPath.section
+            currentListData = DataController.sharedInstance.listDetails[selectedList]
+            
+        } else {
+            selectedList = -1
+            currentListData = []
+        }
         
         if indexPath.row == 0 {
             tableView.reloadData()
-            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Middle, animated: true)
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
 
         }
         
